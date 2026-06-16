@@ -1,0 +1,241 @@
+page {
+  background: #f8fafc;
+}
+
+.agreement-page {
+  min-height: 100vh;
+  padding-bottom: 54rpx;
+  box-sizing: border-box;
+  background:
+    radial-gradient(circle at 86% 0%, rgba(238, 241, 255, 0.95), transparent 30%),
+    radial-gradient(circle at 10% 18%, rgba(220, 235, 255, 0.66), transparent 28%),
+    linear-gradient(180deg, #ffffff 0%, #f8fbff 46%, #ffffff 100%);
+  color: #081a3a;
+}
+
+.agreement-nav {
+  height: calc(92rpx + env(safe-area-inset-top));
+  padding: calc(18rpx + env(safe-area-inset-top)) 24rpx 14rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(18rpx);
+}
+
+.agreement-back {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1rpx solid #e7ebf2;
+  box-shadow: 0 8rpx 22rpx rgba(8, 26, 58, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.agreement-nav-title {
+  position: absolute;
+  left: 150rpx;
+  right: 190rpx;
+  text-align: center;
+  font-size: 34rpx;
+  color: #081a3a;
+  font-weight: 900;
+}
+
+.agreement-menu-pill {
+  width: 174rpx;
+  height: 58rpx;
+  border-radius: 999rpx;
+  border: 1rpx solid #e3e7ee;
+  background: rgba(255, 255, 255, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 0 8rpx 22rpx rgba(8, 26, 58, 0.04);
+}
+
+.agreement-menu-dot,
+.agreement-menu-line,
+.agreement-menu-circle {
+  font-size: 27rpx;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.agreement-hero {
+  margin: 18rpx 24rpx 0;
+  min-height: 210rpx;
+  padding: 28rpx;
+  border-radius: 32rpx;
+  background:
+    radial-gradient(circle at 92% 0%, rgba(255, 247, 239, 0.98), transparent 34%),
+    linear-gradient(105deg, #ffffff 0%, #f7f9ff 58%, #fff7f0 100%);
+  border: 1rpx solid #edf0f5;
+  box-shadow: 0 16rpx 42rpx rgba(8, 26, 58, 0.065);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.agreement-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.agreement-kicker {
+  display: inline-flex;
+  padding: 7rpx 14rpx;
+  border-radius: 999rpx;
+  background: #eef4ff;
+  color: #2952cc;
+  font-size: 20rpx;
+  font-weight: 800;
+}
+
+.agreement-title {
+  display: block;
+  margin-top: 14rpx;
+  max-width: 440rpx;
+  font-size: 38rpx;
+  line-height: 1.2;
+  color: #0f172a;
+  font-weight: 900;
+}
+
+.agreement-desc {
+  display: block;
+  margin-top: 12rpx;
+  max-width: 500rpx;
+  font-size: 24rpx;
+  line-height: 1.45;
+  color: #667085;
+}
+
+.agreement-safe-card,
+.agreement-card {
+  margin: 18rpx 24rpx 0;
+  border-radius: 28rpx;
+  background: #ffffff;
+  border: 1rpx solid #edf0f5;
+  box-shadow: 0 10rpx 30rpx rgba(8, 26, 58, 0.055);
+  box-sizing: border-box;
+}
+
+.agreement-safe-card {
+  min-height: 104rpx;
+  padding: 20rpx 22rpx;
+  border: 1rpx solid #d6f5e4;
+  background: linear-gradient(105deg, #f1fff7 0%, #ffffff 70%);
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.agreement-safe-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.agreement-safe-title {
+  display: block;
+  font-size: 27rpx;
+  color: #111827;
+  font-weight: 900;
+}
+
+.agreement-safe-desc {
+  display: block;
+  margin-top: 6rpx;
+  font-size: 22rpx;
+  color: #6b7280;
+  line-height: 1.35;
+}
+
+.agreement-card {
+  padding: 24rpx;
+}
+
+.agreement-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.agreement-card-icon {
+  width: 58rpx;
+  height: 58rpx;
+  border-radius: 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.agreement-tone-orange {
+  background: #fff1e6;
+}
+
+.agreement-tone-green {
+  background: #ecfdf5;
+}
+
+.agreement-tone-blue {
+  background: #eef4ff;
+}
+
+.agreement-tone-purple {
+  background: #f4f0ff;
+}
+
+.agreement-tone-gray {
+  background: #f3f4f6;
+}
+
+.agreement-card-title {
+  font-size: 31rpx;
+  color: #111827;
+  font-weight: 900;
+}
+
+.agreement-rule-list {
+  margin-top: 18rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 14rpx;
+}
+
+.agreement-rule {
+  display: flex;
+  align-items: flex-start;
+  gap: 12rpx;
+}
+
+.agreement-rule-num {
+  width: 34rpx;
+  height: 34rpx;
+  border-radius: 50%;
+  background: #fff1e6;
+  color: #ff4d19;
+  font-size: 20rpx;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2rpx;
+}
+
+.agreement-rule-text {
+  flex: 1;
+  min-width: 0;
+  font-size: 24rpx;
+  line-height: 1.5;
+  color: #4b5563;
+}

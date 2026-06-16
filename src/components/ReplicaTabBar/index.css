@@ -1,0 +1,84 @@
+.replica-tabbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 80;
+  min-height: 112rpx;
+  padding: 12rpx 28rpx calc(12rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 -10rpx 32rpx rgba(8, 26, 58, 0.06);
+  backdrop-filter: blur(20rpx);
+}
+
+.replica-tabbar-item {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6rpx;
+}
+
+.replica-tabbar-icon-wrap {
+  position: relative;
+  width: 52rpx;
+  height: 52rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.replica-tabbar-item-publish .replica-tabbar-icon-wrap {
+  width: 62rpx;
+  height: 62rpx;
+  margin-top: -16rpx;
+  border-radius: 999rpx;
+  background: linear-gradient(135deg, #FF8A00, #FF3D00);
+  box-shadow: 0 12rpx 26rpx rgba(255, 77, 25, 0.24);
+}
+
+.replica-tabbar-text {
+  font-size: 22rpx;
+  line-height: 1;
+  color: #111827;
+}
+
+.replica-tabbar-item-publish .replica-tabbar-text {
+  margin-top: -2rpx;
+  color: #FF4D19;
+  font-weight: 800;
+}
+
+.replica-tabbar-text-active {
+  color: #FF4D19;
+  font-weight: 700;
+}
+
+.replica-tabbar-badge {
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+  min-width: 30rpx;
+  height: 30rpx;
+  padding: 0 8rpx;
+  border-radius: 999rpx;
+  box-sizing: border-box;
+  background: #FF2D2D;
+  border: 3rpx solid #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.replica-tabbar-badge-text {
+  font-size: 18rpx;
+  line-height: 1;
+  color: #FFFFFF;
+  font-weight: 800;
+}

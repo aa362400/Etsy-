@@ -1,0 +1,90 @@
+page {
+  background: #f8fafc;
+}
+
+.legacy-page {
+  min-height: 100vh;
+  padding: 80rpx 24rpx;
+  box-sizing: border-box;
+  background:
+    radial-gradient(circle at 86% 0%, rgba(238, 241, 255, 0.95), transparent 30%),
+    radial-gradient(circle at 10% 20%, rgba(220, 235, 255, 0.66), transparent 28%),
+    linear-gradient(180deg, #ffffff 0%, #f8fbff 46%, #ffffff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.legacy-card {
+  width: 100%;
+  padding: 48rpx 32rpx;
+  border-radius: 36rpx;
+  background:
+    radial-gradient(circle at 92% 0%, rgba(255, 247, 239, 0.98), transparent 34%),
+    linear-gradient(105deg, #ffffff 0%, #f7f9ff 58%, #fff7f0 100%);
+  border: 1rpx solid #edf0f5;
+  box-shadow: 0 16rpx 42rpx rgba(8, 26, 58, 0.065);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.legacy-brand {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 20rpx;
+}
+
+.legacy-brand-main,
+.legacy-brand-accent {
+  font-size: 54rpx;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -2rpx;
+}
+
+.legacy-brand-main {
+  color: #081a3a;
+}
+
+.legacy-brand-accent {
+  color: #ff4d19;
+}
+
+.legacy-title {
+  display: block;
+  margin-top: 20rpx;
+  font-size: 40rpx;
+  color: #0f172a;
+  font-weight: 900;
+}
+
+.legacy-desc {
+  display: block;
+  margin-top: 12rpx;
+  font-size: 25rpx;
+  line-height: 1.45;
+  color: #667085;
+}
+
+.legacy-btn {
+  margin-top: 34rpx;
+  width: 420rpx;
+  height: 84rpx;
+  border-radius: 999rpx;
+  background: var(--brand-gradient);
+  border: 0;
+  box-shadow: 0 14rpx 30rpx rgba(255, 106, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+}
+
+.legacy-btn-text {
+  font-size: 30rpx;
+  color: #ffffff;
+  font-weight: 900;
+}

@@ -1,0 +1,116 @@
+{
+  "name": "youying-miniapp-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Youying mini program frontend",
+  "scripts": {
+    "build": "pnpm build:weapp",
+    "build:pack": "pnpm exec concurrently --kill-others-on-fail --kill-signal SIGKILL -n weapp,tt -c yellow,cyan \"pnpm build:weapp\" \"pnpm build:tt\"",
+    "build:tt": "taro build --type tt",
+    "build:weapp": "taro build --type weapp",
+    "build:h5": "taro build --type h5",
+    "build:web": "taro build --type h5",
+    "dev": "pnpm dev:weapp",
+    "dev:tt": "taro build --type tt --watch",
+    "dev:weapp": "taro build --type weapp --watch",
+    "dev:h5": "taro build --type h5 --watch",
+    "dev:web": "taro build --type h5 --watch",
+    "preinstall": "npx only-allow pnpm",
+    "_postinstall_disabled": "weapp-tw patch",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx,css}\"",
+    "lint:build": "eslint \"src/**/*.{js,jsx,ts,tsx,css}\" --max-warnings=0 --quiet",
+    "lint:fix": "eslint \"src/**/*.{js,jsx,ts,tsx,css}\" --fix",
+    "new": "taro new",
+    "preview:tt": "taro build --type tt --preview",
+    "preview:weapp": "taro build --type weapp --preview",
+    "test:contracts": "node --test test/*.test.cjs",
+    "test:payment-sync": "node --test test/payment-sync-contract.test.cjs",
+    "tsc": "npx tsc --noEmit --skipLibCheck",
+    "validate": "pnpm exec concurrently --kill-others-on-fail --kill-signal SIGKILL -n lint,tsc,contracts,weapp -c red,blue,green,yellow \"pnpm lint:build\" \"pnpm tsc\" \"pnpm test:contracts\" \"pnpm build:weapp\""
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,css}": [
+      "eslint"
+    ]
+  },
+  "browserslist": [
+    "last 3 versions",
+    "Android >= 4.1",
+    "ios >= 8"
+  ],
+  "dependencies": {
+    "@babel/runtime": "^7.24.4",
+    "@tarojs/components": "4.1.9",
+    "@tarojs/helper": "4.1.9",
+    "@tarojs/plugin-framework-react": "4.1.9",
+    "@tarojs/plugin-platform-h5": "4.1.9",
+    "@tarojs/plugin-platform-tt": "4.1.9",
+    "@tarojs/plugin-platform-weapp": "4.1.9",
+    "@tarojs/react": "4.1.9",
+    "@tarojs/runtime": "4.1.9",
+    "@tarojs/shared": "4.1.9",
+    "@tarojs/taro": "4.1.9",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "lucide-react-taro": "^1.4.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss-animate": "^1.0.7",
+    "zustand": "^5.0.9"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.4",
+    "@babel/plugin-proposal-decorators": "^7.29.7",
+    "@babel/plugin-transform-class-properties": "7.25.9",
+    "@babel/preset-react": "^7.24.1",
+    "@eslint/eslintrc": "^3.3.1",
+    "@tailwindcss/postcss": "^4.1.18",
+    "@tarojs/cli": "4.1.9",
+    "@tarojs/plugin-generator": "4.1.9",
+    "@tarojs/plugin-mini-ci": "4.1.9",
+    "@tarojs/vite-runner": "4.1.9",
+    "@types/minimatch": "^5",
+    "@types/node": "^24",
+    "@types/react": "^18.0.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "babel-preset-taro": "4.1.9",
+    "concurrently": "^9.2.1",
+    "dotenv": "^17.2.3",
+    "eslint": "^8.57.0",
+    "eslint-config-taro": "4.1.9",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.4.0",
+    "eslint-plugin-tailwindcss": "^3.18.2",
+    "less": "^4.2.0",
+    "lint-staged": "^16.1.2",
+    "miniprogram-ci": "^2.1.26",
+    "only-allow": "^1.2.2",
+    "postcss": "^8.5.6",
+    "react-refresh": "^0.14.0",
+    "stylelint": "^16.4.0",
+    "stylelint-config-standard": "^38.0.0",
+    "tailwindcss": "^4.1.18",
+    "terser": "^5.30.4",
+    "tt-ide-cli": "^0.1.31",
+    "typescript": "^5.4.5",
+    "vite": "^4.2.0",
+    "weapp-tailwindcss": "^4.10.3"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "pnpm": ">=9.0.0"
+  },
+  "templateInfo": {
+    "name": "default",
+    "typescript": true,
+    "css": "Less",
+    "framework": "React"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "@tarojs/plugin-mini-ci@4.1.9": "patches/@tarojs__plugin-mini-ci@4.1.9.patch"
+    }
+  }
+}

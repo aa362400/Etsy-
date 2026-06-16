@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "Node16",
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "moduleResolution": "Node16",
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
+    "outDir": "lib",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "rootDir": ".",
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["./src", "./types", "./config"],
+  "exclude": ["_disabled", "_backup_*", "node_modules_broken", "dist", "dist-web", "dist-tt", "*.log", "key", "patches", "admin-console", "server"],
+  "compileOnSave": false
+}

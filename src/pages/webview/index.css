@@ -1,0 +1,40 @@
+page {
+  background: #fffaf0;
+}
+
+.webview-page {
+  min-height: 100vh;
+  background: #fffaf0;
+}
+
+.webview-header {
+  padding: 18rpx 24rpx;
+  background: linear-gradient(135deg, #fff8de, #ffffff);
+  border-bottom: 1rpx solid rgba(255, 184, 45, 0.24);
+}
+
+.webview-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #1c1710;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.webview-empty {
+  min-height: 100vh;
+  padding: 180rpx 48rpx 0;
+  box-sizing: border-box;
+  text-align: center;
+  background: #fffaf0;
+}
+
+.webview-desc {
+  display: block;
+  margin-top: 20rpx;
+  font-size: 26rpx;
+  line-height: 1.7;
+  color: #7a6a52;
+}
