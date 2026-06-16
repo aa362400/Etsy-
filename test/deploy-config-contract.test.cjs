@@ -5,19 +5,10 @@ const test = require('node:test');
 
 const projectRoot = path.join(__dirname, '..');
 
-test('deployment script points to the formal admin console directory by default', () => {
-  const deployScript = fs.readFileSync(path.join(projectRoot, 'deploy.sh'), 'utf8');
-
-  assert.match(
-    deployScript,
-    /ADMIN_SRC_DIR="\$\{ADMIN_SRC_DIR:-\$PROJECT_ROOT\/\.\.\/控制台\}"/,
-    'deploy.sh must default ADMIN_SRC_DIR to ../控制台, otherwise production can deploy the wrong or missing console',
-  );
-  assert.doesNotMatch(deployScript, /鎺ュ埗鍙|皚|\?\?\?/, 'deploy.sh contains mojibake in admin console path');
-});
+const read = (...parts) => fs.readFileSync(path.join(projectRoot, ...parts), 'utf8');
 
 test('miniapp production env example does not point to localhost', () => {
-  const envExample = fs.readFileSync(path.join(projectRoot, '.env.production.example'), 'utf8');
+  const envExample = read('.env.production.example');
 
   assert.doesNotMatch(envExample, /PROJECT_DOMAIN\s*=\s*https?:\/\/(?:127\.0\.0\.1|localhost|0\.0\.0\.0)(?::\d+)?/);
   assert.match(
@@ -27,27 +18,62 @@ test('miniapp production env example does not point to localhost', () => {
   );
 });
 
-test('deployment script runs frontend contracts and backend predeploy checks before restart', () => {
-  const deployScript = fs.readFileSync(path.join(projectRoot, 'deploy.sh'), 'utf8');
-  const validateIndex = deployScript.indexOf('pnpm validate');
-  const predeployIndex = deployScript.indexOf('npm run predeploy:check');
-  const pm2Index = deployScript.indexOf('pm2 restart');
+test('frontend split repo uses Dockerfile instead of legacy deploy.sh pipeline', () => {
+  const dockerfile = read('Dockerfile');
 
-  assert.notEqual(validateIndex, -1, 'deploy.sh must run pnpm validate before building production artifacts');
-  assert.notEqual(predeployIndex, -1, 'deploy.sh must run npm run predeploy:check before PM2 restart');
-  assert.notEqual(pm2Index, -1, 'deploy.sh must still restart the PM2 service');
-  assert.ok(validateIndex < predeployIndex, 'frontend/contracts validation should run before backend production predeploy checks');
-  assert.ok(predeployIndex < pm2Index, 'backend predeploy checks must run before PM2 restart');
+  assert.match(dockerfile, /FROM node:20-alpine AS builder/);
+  assert.match(dockerfile, /pnpm install --frozen-lockfile/);
+  assert.match(dockerfile, /pnpm build:web/);
+  assert.match(dockerfile, /COPY --from=builder \/app\/dist-web \.\/dist-web/);
+  assert.doesNotMatch(dockerfile, /\.env\.production/);
+  assert.doesNotMatch(dockerfile, /pm2 restart|predeploy:check|copy_admin_console/);
 });
 
-test('deployment script blocks admin static assets that contain local API addresses', () => {
-  const deployScript = fs.readFileSync(path.join(projectRoot, 'deploy.sh'), 'utf8');
-  const copyIndex = deployScript.indexOf('copy_admin_console');
-  const scanIndex = deployScript.indexOf('check_admin_public_no_local_urls');
-  const pm2Index = deployScript.indexOf('pm2 restart');
+test('frontend Docker build context keeps secrets and local artifacts out of CloudBase image builds', () => {
+  const dockerignore = read('.dockerignore');
 
-  assert.notEqual(scanIndex, -1, 'deploy.sh must scan built admin assets for localhost/127.0.0.1/3016 before serving them');
-  assert.ok(copyIndex < scanIndex, 'admin asset scan must run after the formal console is copied to server/public/admin');
-  assert.ok(scanIndex < pm2Index, 'admin asset scan must run before PM2 restart');
-  assert.match(deployScript, /127\\.0\\.0\\.1|localhost|0\\.0\\.0\\.0|3016/);
+  assert.match(dockerignore, /^node_modules$/m);
+  assert.match(dockerignore, /^dist-web$/m);
+  assert.match(dockerignore, /^\.env\.production$/m);
+  assert.match(dockerignore, /^\*\.log$/m);
+});
+
+test('compatibility launch entry serves dist-web assets for platforms still using node server/dist/main.js', () => {
+  const launchEntry = read('server', 'dist', 'main.js');
+
+  assert.match(launchEntry, /Missing H5 build output/);
+  assert.match(launchEntry, /ensureBuildOutput/);
+  assert.match(launchEntry, /spawnSync/);
+  assert.match(launchEntry, /pnpm/);
+  assert.match(launchEntry, /dist-web/);
+  assert.match(launchEntry, /index\.html/);
+  assert.match(launchEntry, /createServer/);
+  assert.match(launchEntry, /process\.env\.PORT/);
+});
+
+test('package start scripts support cloud platforms that run Node app commands instead of Dockerfile', () => {
+  const pkg = JSON.parse(read('package.json'));
+
+  assert.equal(pkg.scripts.start, 'node server/dist/main.js');
+  assert.equal(pkg.scripts.postinstall, 'pnpm build:web');
+});
+
+test('admin console cloud build does not execute bare tsc binaries from uploaded node_modules', () => {
+  const pkg = JSON.parse(read('cloudrun-source', 'admin-console', 'package.json'));
+
+  assert.equal(
+    pkg.scripts.build,
+    'node ./node_modules/typescript/bin/tsc --noEmit && node ./node_modules/vite/bin/vite.js build',
+  );
+  assert.equal(pkg.scripts.tsc, 'node ./node_modules/typescript/bin/tsc --noEmit');
+  assert.doesNotMatch(pkg.scripts.build, /(^|\s)tsc(\s|$)/);
+});
+
+test('admin console cloud upload source excludes local install and build artifacts', () => {
+  const ignoreFile = read('cloudrun-source', 'admin-console', '.cloudbaseignore');
+
+  assert.match(ignoreFile, /^node_modules\/$/m);
+  assert.match(ignoreFile, /^dist\/$/m);
+  assert.match(ignoreFile, /^\.env$/m);
+  assert.match(ignoreFile, /^\*\.log$/m);
 });
