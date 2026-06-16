@@ -21,8 +21,8 @@ test('miniapp production env example does not point to localhost', () => {
 test('frontend split repo uses Dockerfile instead of legacy deploy.sh pipeline', () => {
   const dockerfile = read('Dockerfile');
 
-  assert.match(dockerfile, /FROM node:20-alpine AS builder/);
-  assert.match(dockerfile, /pnpm install --frozen-lockfile/);
+  assert.match(dockerfile, /FROM node:20-bookworm-slim AS builder/);
+  assert.match(dockerfile, /pnpm install --frozen-lockfile --ignore-scripts/);
   assert.match(dockerfile, /pnpm build:web/);
   assert.match(dockerfile, /COPY --from=builder \/app\/dist-web \.\/dist-web/);
   assert.doesNotMatch(dockerfile, /\.env\.production/);
